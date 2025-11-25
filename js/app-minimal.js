@@ -137,10 +137,10 @@ function renderNewsList() {
                 <li class="news-item" data-id="${msg.id}">
                     <div class="news-header">
                         <div class="news-title">${escapeHtml(msg.title)}</div>
-                        <span class="news-category ${msg.category}">${categoryLabel}</span>
-                    </div>
-                    <div class="news-meta">
-                        ${formatDate(msg.created)}
+                        <div class="news-right">
+                            <span class="news-category ${msg.category}">${categoryLabel}</span>
+                            <div class="news-meta">${formatDate(msg.created)}</div>
+                        </div>
                     </div>
                     <div class="news-content">${escapeHtml(msg.content)}</div>
                     <div class="news-actions">

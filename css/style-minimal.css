@@ -125,16 +125,19 @@ body {
     flex: 1;
 }
 
-.news-meta {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    display: none; /* Piilotetaan oletusarvoisesti */
+/* Right side container for category and timestamp */
+.news-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    flex-shrink: 0;
 }
 
-/* Näytä aikamerkintä vain laajennetussa tilassa */
-.news-item.expanded .news-meta {
-    display: block;
-    margin-top: 4px;
+.news-meta {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    display: block; /* Näytetään aina */
 }
 
 .news-category {
