@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfoAHKY - Teksti-TV</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="teletext-container">
+        <!-- Header -->
+        <header class="teletext-header">
+            <div class="header-left">
+                <span class="page-number">100</span>
+            </div>
+            <div class="header-center">
+                <h1>INFOAHKY</h1>
+            </div>
+            <div class="header-right">
+                <span class="time" id="current-time"></span>
+                <span class="date" id="current-date"></span>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="teletext-nav">
+            <button class="nav-btn red" data-page="100">100 ETUSIVU</button>
+            <button class="nav-btn green" data-page="200">200 UUTISET</button>
+            <button class="nav-btn yellow" data-page="300">300 TIEDOTTEET</button>
+            <button class="nav-btn cyan" data-page="400">400 LISÄÄ VIESTI</button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="teletext-main" id="main-content">
+            <!-- Content will be loaded dynamically -->
+        </main>
+
+        <!-- Footer -->
+        <footer class="teletext-footer">
+            <div class="footer-nav">
+                <span class="key red">■</span> ETUSIVU
+                <span class="key green">■</span> UUTISET
+                <span class="key yellow">■</span> TIEDOTTEET
+                <span class="key cyan">■</span> LISÄÄ
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal for adding/editing messages -->
+    <div class="modal" id="message-modal" style="display: none;">
+        <div class="modal-content">
+            <h2>LISÄÄ VIESTI</h2>
+            <form id="message-form">
+                <input type="hidden" id="message-id">
+                <div class="form-group">
+                    <label for="message-title">OTSIKKO:</label>
+                    <input type="text" id="message-title" maxlength="50" required>
+                </div>
+                <div class="form-group">
+                    <label for="message-content">SISÄLTÖ:</label>
+                    <textarea id="message-content" rows="5" maxlength="500" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="message-category">KATEGORIA:</label>
+                    <select id="message-category">
+                        <option value="uutiset">Uutiset</option>
+                        <option value="tiedotteet">Tiedotteet</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">TALLENNA</button>
+                    <button type="button" class="btn-cancel" id="cancel-btn">PERUUTA</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
