@@ -1,0 +1,452 @@
+/* InfoAHKY Teletext Style CSS */
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 10px;
+}
+
+/* Teletext container */
+.teletext-container {
+    width: 100%;
+    max-width: 800px;
+    min-height: 100vh;
+    background-color: #000;
+    border: 2px solid #333;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header styles */
+.teletext-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #00f;
+    color: #fff;
+    border-bottom: 2px solid #ff0;
+}
+
+.header-left .page-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff0;
+}
+
+.header-center h1 {
+    font-size: 1.5rem;
+    color: #fff;
+    text-shadow: 2px 2px #000;
+}
+
+.header-right {
+    text-align: right;
+    font-size: 0.9rem;
+}
+
+.header-right .time {
+    display: block;
+    color: #0ff;
+    font-weight: bold;
+}
+
+.header-right .date {
+    display: block;
+    color: #ff0;
+}
+
+/* Navigation styles */
+.teletext-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 10px;
+    background-color: #111;
+    border-bottom: 1px solid #333;
+}
+
+.nav-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 8px 12px;
+    border: none;
+    background-color: #222;
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.nav-btn:hover {
+    background-color: #444;
+}
+
+.nav-btn.red { border-left: 4px solid #f00; }
+.nav-btn.green { border-left: 4px solid #0f0; }
+.nav-btn.yellow { border-left: 4px solid #ff0; }
+.nav-btn.cyan { border-left: 4px solid #0ff; }
+
+.nav-btn.active {
+    background-color: #333;
+}
+
+/* Main content area */
+.teletext-main {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+/* Page styles */
+.page-title {
+    color: #ff0;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px dashed #ff0;
+}
+
+/* Message card styles */
+.message-card {
+    background-color: #111;
+    border: 1px solid #333;
+    margin-bottom: 15px;
+    padding: 12px;
+}
+
+.message-card:hover {
+    border-color: #0ff;
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.message-title {
+    color: #0ff;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.message-meta {
+    font-size: 0.75rem;
+    color: #888;
+}
+
+.message-content {
+    color: #fff;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    white-space: pre-wrap;
+}
+
+.message-actions {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px dotted #333;
+}
+
+.btn-edit, .btn-delete {
+    background: none;
+    border: 1px solid;
+    padding: 3px 8px;
+    margin-right: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+
+.btn-edit {
+    color: #0f0;
+    border-color: #0f0;
+}
+
+.btn-edit:hover {
+    background-color: #0f0;
+    color: #000;
+}
+
+.btn-delete {
+    color: #f00;
+    border-color: #f00;
+}
+
+.btn-delete:hover {
+    background-color: #f00;
+    color: #000;
+}
+
+/* Home page styles */
+.home-welcome {
+    color: #0f0;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 15px;
+    border: 1px dashed #0f0;
+}
+
+.home-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat-box {
+    background-color: #111;
+    border: 1px solid #333;
+    padding: 15px;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff0;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.recent-section {
+    margin-top: 20px;
+}
+
+.section-title {
+    color: #0ff;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #0ff;
+}
+
+.recent-item {
+    padding: 8px 0;
+    border-bottom: 1px dotted #333;
+}
+
+.recent-item:last-child {
+    border-bottom: none;
+}
+
+.recent-title {
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.recent-date {
+    color: #888;
+    font-size: 0.75rem;
+}
+
+/* Footer styles */
+.teletext-footer {
+    background-color: #111;
+    padding: 10px 15px;
+    border-top: 2px solid #333;
+}
+
+.footer-nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.key {
+    font-size: 0.7rem;
+    margin-right: 3px;
+}
+
+.key.red { color: #f00; }
+.key.green { color: #0f0; }
+.key.yellow { color: #ff0; }
+.key.cyan { color: #0ff; }
+
+/* Modal styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #111;
+    border: 2px solid #0ff;
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+}
+
+.modal-content h2 {
+    color: #ff0;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    color: #0ff;
+    margin-bottom: 5px;
+    font-size: 0.85rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    background-color: #000;
+    border: 1px solid #333;
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #0ff;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-submit, .btn-cancel {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.btn-submit {
+    background-color: #0f0;
+    color: #000;
+}
+
+.btn-submit:hover {
+    background-color: #0a0;
+}
+
+.btn-cancel {
+    background-color: #f00;
+    color: #fff;
+}
+
+.btn-cancel:hover {
+    background-color: #a00;
+}
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #888;
+}
+
+.empty-state-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.empty-state-text {
+    font-size: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    body {
+        padding: 0;
+    }
+
+    .teletext-container {
+        border: none;
+    }
+
+    .teletext-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+    }
+
+    .header-left, .header-right {
+        text-align: center;
+    }
+
+    .nav-btn {
+        min-width: 100%;
+        font-size: 0.8rem;
+    }
+
+    .footer-nav {
+        flex-wrap: wrap;
+        gap: 10px;
+        font-size: 0.7rem;
+    }
+}
+
+/* Blinking cursor effect for page title */
+.page-title::after {
+    content: '█';
+    animation: blink 1s step-end infinite;
+    color: #0ff;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* Scrollbar styling */
+.teletext-main::-webkit-scrollbar {
+    width: 8px;
+}
+
+.teletext-main::-webkit-scrollbar-track {
+    background: #111;
+}
+
+.teletext-main::-webkit-scrollbar-thumb {
+    background: #333;
+}
+
+.teletext-main::-webkit-scrollbar-thumb:hover {
+    background: #444;
+}
