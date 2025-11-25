@@ -29,7 +29,7 @@ function loadMessages() {
         App.messages = [
             {
                 id: generateId(),
-                title: 'Tervetuloa InfoAHKY:yn',
+                title: 'Tervetuloa!',
                 content: 'Tämä on organisaatiosi tiedotuskanava. Voit lisätä omia viestejäsi painamalla "LISÄÄ VIESTI" -nappia.',
                 category: 'tiedotteet',
                 created: new Date().toISOString(),
