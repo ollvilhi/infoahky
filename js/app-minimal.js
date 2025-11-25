@@ -160,19 +160,33 @@ function renderNewsList() {
         `;
     }
 
-    // Add stats at bottom
-    const uutisCount = App.messages.filter(m => m.category === 'uutiset').length;
-    const tuotekehitysCount = App.messages.filter(m => m.category === 'tuotekehitys').length;
+    // Add stats at bottom for all categories (single pass through messages)
+    const categoryCounts = App.messages.reduce((acc, m) => {
+        acc[m.category] = (acc[m.category] || 0) + 1;
+        return acc;
+    }, {});
     
     html += `
         <div class="stats-bar">
             <div class="stat-item">
-                <div class="stat-value">${uutisCount}</div>
-                <div class="stat-label">Uutista</div>
+                <div class="stat-value">${categoryCounts['uutiset'] || 0}</div>
+                <div class="stat-label">Uutiset</div>
             </div>
             <div class="stat-item">
-                <div class="stat-value">${tuotekehitysCount}</div>
+                <div class="stat-value">${categoryCounts['tuotekehitys'] || 0}</div>
                 <div class="stat-label">Tuotekehitys</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">${categoryCounts['it-tuki'] || 0}</div>
+                <div class="stat-label">IT-tuki</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">${categoryCounts['turvallisuus'] || 0}</div>
+                <div class="stat-label">Turvallisuus</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">${categoryCounts['hr'] || 0}</div>
+                <div class="stat-label">HR</div>
             </div>
             <div class="stat-item">
                 <div class="stat-value">${App.messages.length}</div>
