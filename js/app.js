@@ -29,7 +29,7 @@ function loadMessages() {
         App.messages = [
             {
                 id: generateId(),
-                title: 'Tervetuloa InfoAHKY:yn',
+                title: 'Tervetuloa!',
                 content: 'Tämä on organisaatiosi tiedotuskanava. Voit lisätä omia viestejäsi painamalla "LISÄÄ VIESTI" -nappia.',
                 category: 'tiedotteet',
                 created: new Date().toISOString(),
@@ -163,9 +163,9 @@ function renderHomePage(container) {
     container.innerHTML = `
         <h2 class="page-title">ETUSIVU</h2>
         
-        <div class="home-welcome">
+        <div class="home-welcome" style="text-align: center;">
             ╔════════════════════════════════════╗<br>
-            ║   TERVETULOA INFOAHKY:YN!         ║<br>
+            ║   TERVETULOA!         ║<br>
             ║   Organisaatiosi tiedotuskanava   ║<br>
             ╚════════════════════════════════════╝
         </div>
