@@ -163,11 +163,14 @@ function renderHomePage(container) {
     container.innerHTML = `
         <h2 class="page-title">ETUSIVU</h2>
         
-        <div class="home-welcome">
-            ╔════════════════════════════════════╗<br>
-            ║   TERVETULOA INFOAHKY:YN!         ║<br>
-            ║   Organisaatiosi tiedotuskanava   ║<br>
-            ╚════════════════════════════════════╝
+        <div class="recent-section">
+            <h3 class="section-title">VIIMEISIMMÄT VIESTIT</h3>
+            ${recent.length > 0 ? recent.map(msg => `
+                <div class="recent-item">
+                    <div class="recent-title">► ${escapeHtml(msg.title)}</div>
+                    <div class="recent-date">${formatDate(msg.created)}</div>
+                </div>
+            `).join('') : '<div class="empty-state"><div class="empty-state-text">Ei viestejä</div></div>'}
         </div>
 
         <div class="home-stats">
@@ -185,17 +188,12 @@ function renderHomePage(container) {
             </div>
         </div>
 
-        <div class="recent-section">
-            <h3 class="section-title">VIIMEISIMMÄT VIESTIT</h3>
-            ${recent.length > 0 ? recent.map(msg => `
-                <div class="recent-item">
-                    <div class="recent-title">► ${escapeHtml(msg.title)}</div>
-                    <div class="recent-date">${formatDate(msg.created)}</div>
-                </div>
-            `).join('') : '<div class="empty-state"><div class="empty-state-text">Ei viestejä</div></div>'}
+        <div class="home-welcome">
+            <div class="welcome-title">Tervetuloa InfoAHKY:yn!</div>
+            <div class="welcome-text">Organisaatiosi tiedotuskanava</div>
         </div>
 
-        <div style="margin-top: 20px; color: #888; font-size: 0.8rem; text-align: center;">
+        <div class="keyboard-hints">
             Näppäimet: 1=Etusivu | 2=Uutiset | 3=Tiedotteet | 4=Lisää viesti
         </div>
     `;
