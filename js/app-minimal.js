@@ -131,10 +131,12 @@ function renderNewsList() {
         filtered.forEach(msg => {
             html += `
                 <li class="news-item" data-id="${msg.id}">
-                    <div class="news-title">${escapeHtml(msg.title)}</div>
+                    <div class="news-header">
+                        <div class="news-title">${escapeHtml(msg.title)}</div>
+                        <span class="news-category ${msg.category}">${msg.category === 'uutiset' ? 'Uutinen' : 'Tiedote'}</span>
+                    </div>
                     <div class="news-meta">
                         ${formatDate(msg.created)}
-                        <span class="news-category ${msg.category}">${msg.category === 'uutiset' ? 'Uutinen' : 'Tiedote'}</span>
                     </div>
                     <div class="news-content">${escapeHtml(msg.content)}</div>
                     <div class="news-actions">

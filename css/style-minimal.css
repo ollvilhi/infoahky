@@ -95,8 +95,8 @@ body {
 }
 
 .news-item {
-    padding: 6px 16px;      /* pienempi padding */
-    margin-bottom: 2px;     /* hyvin pieni väli */
+    padding: 4px 16px;      /* pienempi padding */
+    margin-bottom: 0;       /* ei väliä */
     border-bottom: 1px solid var(--border-light);
 }
 
@@ -108,18 +108,33 @@ body {
     background: var(--primary-light);
 }
 
+/* News header with title and category side by side */
+.news-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
 .news-title {
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     font-size: 0.95rem;
     color: var(--text-primary);
-    line-height: 1.2;       /* tiiviimpi riviväli */
-    margin-bottom: 2px;     /* pienempi otsikon väli */
+    line-height: 1.2;
+    flex: 1;
 }
 
 .news-meta {
     font-size: 0.75rem;
     color: var(--text-muted);
+    display: none; /* Piilotetaan oletusarvoisesti */
+}
+
+/* Näytä aikamerkintä vain laajennetussa tilassa */
+.news-item.expanded .news-meta {
+    display: block;
+    margin-top: 4px;
 }
 
 .news-category {
@@ -130,7 +145,8 @@ body {
     letter-spacing: 0.05em;
     padding: 2px 6px;
     border-radius: 4px;
-    margin-left: 8px;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .news-category.uutiset {
@@ -523,7 +539,7 @@ body {
     }
     
     .news-item {
-        padding: 12px 16px;
+        padding: 4px 16px;
     }
     
     .fab-container {
@@ -590,7 +606,7 @@ body {
 
 /* Tiivis uutislista */
 .app-main .news-item {
-    margin-bottom: 1px; /* pienempi väli uutisten välillä */
+    margin-bottom: 0; /* ei väliä uutisten välillä */
     padding-bottom: 4px;
     border-bottom: 1px solid #eee;
 }
