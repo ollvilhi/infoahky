@@ -31,7 +31,7 @@ function loadMessages() {
                 id: generateId(),
                 title: 'Tervetuloa InfoAHKY:yn',
                 content: 'Tämä on organisaatiosi tiedotuskanava. Napauta viestiä lukeaksesi sen. Lisää uusi viesti + -painikkeella.',
-                category: 'tiedotteet',
+                category: 'tuotekehitys',
                 created: new Date().toISOString(),
                 updated: new Date().toISOString()
             },
@@ -122,18 +122,22 @@ function renderNewsList() {
         <div class="filter-tabs">
             <button class="filter-tab ${App.currentFilter === 'all' ? 'active' : ''}" data-filter="all">Kaikki</button>
             <button class="filter-tab ${App.currentFilter === 'uutiset' ? 'active' : ''}" data-filter="uutiset">Uutiset</button>
-            <button class="filter-tab ${App.currentFilter === 'tiedotteet' ? 'active' : ''}" data-filter="tiedotteet">Tiedotteet</button>
+            <button class="filter-tab ${App.currentFilter === 'tuotekehitys' ? 'active' : ''}" data-filter="tuotekehitys">Tuotekehitys</button>
+            <button class="filter-tab ${App.currentFilter === 'it-tuki' ? 'active' : ''}" data-filter="it-tuki">IT-tuki</button>
+            <button class="filter-tab ${App.currentFilter === 'turvallisuus' ? 'active' : ''}" data-filter="turvallisuus">Turvallisuus</button>
+            <button class="filter-tab ${App.currentFilter === 'hr' ? 'active' : ''}" data-filter="hr">HR</button>
         </div>
     `;
 
     if (filtered.length > 0) {
         html += '<ul class="news-list">';
         filtered.forEach(msg => {
+            const categoryLabel = getCategoryLabel(msg.category);
             html += `
                 <li class="news-item" data-id="${msg.id}">
                     <div class="news-header">
                         <div class="news-title">${escapeHtml(msg.title)}</div>
-                        <span class="news-category ${msg.category}">${msg.category === 'uutiset' ? 'Uutinen' : 'Tiedote'}</span>
+                        <span class="news-category ${msg.category}">${categoryLabel}</span>
                     </div>
                     <div class="news-meta">
                         ${formatDate(msg.created)}
@@ -158,7 +162,7 @@ function renderNewsList() {
 
     // Add stats at bottom
     const uutisCount = App.messages.filter(m => m.category === 'uutiset').length;
-    const tiedoteCount = App.messages.filter(m => m.category === 'tiedotteet').length;
+    const tuotekehitysCount = App.messages.filter(m => m.category === 'tuotekehitys').length;
     
     html += `
         <div class="stats-bar">
@@ -167,8 +171,8 @@ function renderNewsList() {
                 <div class="stat-label">Uutista</div>
             </div>
             <div class="stat-item">
-                <div class="stat-value">${tiedoteCount}</div>
-                <div class="stat-label">Tiedotetta</div>
+                <div class="stat-value">${tuotekehitysCount}</div>
+                <div class="stat-label">Tuotekehitys</div>
             </div>
             <div class="stat-item">
                 <div class="stat-value">${App.messages.length}</div>
@@ -305,6 +309,18 @@ function formatDate(dateStr) {
         day: 'numeric',
         month: 'numeric'
     });
+}
+
+// Get category display label
+function getCategoryLabel(category) {
+    const labels = {
+        'uutiset': 'Uutinen',
+        'tuotekehitys': 'Tuotekehitys',
+        'it-tuki': 'IT-tuki',
+        'turvallisuus': 'Turvallisuus',
+        'hr': 'HR'
+    };
+    return labels[category] || category;
 }
 
 // Escape HTML to prevent XSS

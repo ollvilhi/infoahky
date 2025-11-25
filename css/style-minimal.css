@@ -154,9 +154,24 @@ body {
     color: #166534;
 }
 
-.news-category.tiedotteet {
+.news-category.tuotekehitys {
     background: #fef3c7;
     color: #92400e;
+}
+
+.news-category.it-tuki {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.news-category.turvallisuus {
+    background: #fce7f3;
+    color: #9d174d;
+}
+
+.news-category.hr {
+    background: #e0e7ff;
+    color: #4338ca;
 }
 
 /* Expanded news content (when clicked) */
@@ -466,13 +481,25 @@ body {
     background: var(--border-light);
 }
 
-/* Category filter tabs */
+/* Category filter tabs - horizontally scrollable */
 .filter-tabs {
     display: flex;
     padding: 0 16px 12px;
     gap: 8px;
     background: var(--bg-primary);
     border-bottom: 1px solid var(--border-light);
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    flex-wrap: nowrap;
+    min-height: 44px;
+}
+
+.filter-tabs::-webkit-scrollbar {
+    display: none;
 }
 
 .filter-tab {
@@ -486,6 +513,7 @@ body {
     color: var(--text-muted);
     cursor: pointer;
     transition: all 0.15s;
+    flex-shrink: 0;
 }
 
 .filter-tab:hover {
@@ -497,6 +525,15 @@ body {
     background: var(--primary);
     border-color: var(--primary);
     color: white;
+}
+
+/* Alternating background colors for news items */
+.news-item:nth-child(odd) {
+    background: var(--bg-primary);
+}
+
+.news-item:nth-child(even) {
+    background: #f8fafc;
 }
 
 /* Responsive - desktop adjustments */
