@@ -14,9 +14,9 @@
 html,body{height:100%}
 body{
   margin:0;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  background:var(--bg);
-  color:var(--text);
+  font-family: 'Inter', 'Nunito', 'Rubik', Arial, sans-serif;
+  background: linear-gradient(135deg, #f7f8fa 0%, #e9ecef 100%);
+  color: #222;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
   padding:18px;
@@ -143,10 +143,36 @@ body{
 .stat-number{ font-size:1.5rem; color:var(--accent-2); font-weight:700 }
 .stat-label{ color:var(--muted); font-size:0.86rem }
 
-.section-title{ color:var(--accent); font-weight:700; margin-bottom:8px }
-.recent-item{ padding:8px 0; border-bottom:1px dashed var(--border) }
-.recent-title{ font-weight:600 }
-.recent-date{ color:var(--muted); font-size:0.85rem }
+.section-title, .page-title {
+    border-bottom: 2px solid #e0e0e0;
+    margin-bottom: 16px;
+    padding-bottom: 4px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.home-stats, .recent-section {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(180,180,200,0.07);
+    margin: 24px 0;
+    padding: 16px;
+}
+
+.recent-item {
+    border-bottom: 1px solid #ececec;
+    padding: 8px 0;
+}
+
+.recent-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.recent-date {
+    font-size: 0.9rem;
+    color: #888;
+}
 
 /* Footer */
 .teletext-footer{ padding:14px 18px; border-top:1px solid var(--border); background:transparent }
@@ -173,3 +199,13 @@ body{
 
 /* Responsive */
 @media (max-width:600px){ body{ padding:12px } .teletext-container{ border-radius:10px } .nav-btn{ min-width:0 } .header-center h1{ font-size:1rem } }
+
+@media (max-width: 600px) {
+    .home-stats, .recent-section {
+        margin: 12px 0;
+        padding: 10px;
+    }
+    .page-title, .section-title {
+        font-size: 1.2rem;
+    }
+}
