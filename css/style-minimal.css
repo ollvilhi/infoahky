@@ -152,11 +152,6 @@ body {
     flex-shrink: 0;
 }
 
-.news-category.uutiset {
-    background: #dcfce7;
-    color: #166534;
-}
-
 .news-category.johto {
     background: #dcfce7;
     color: #166534;
