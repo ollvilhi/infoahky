@@ -166,11 +166,10 @@ function renderNewsList() {
             html += '<ul class="news-list main-topics-list">';
             mainTopics.forEach(msg => {
                 const categoryLabel = getCategoryLabel(msg.category);
-                const mainTopicBadge = msg.isMainTopic ? '<span class="main-topic-badge">★</span>' : '';
                 html += `
                     <li class="news-item main-topic-item" data-id="${msg.id}">
                         <div class="news-header">
-                            <div class="news-title">${mainTopicBadge}${escapeHtml(msg.title)}</div>
+                            <div class="news-title">${getMainTopicBadge(msg.isMainTopic)}${escapeHtml(msg.title)}</div>
                             <div class="news-right">
                                 <span class="news-category ${msg.category}">${categoryLabel}</span>
                                 <div class="news-meta">${formatDate(msg.created)}</div>
@@ -193,11 +192,10 @@ function renderNewsList() {
         html += '<ul class="news-list">';
         filtered.forEach(msg => {
             const categoryLabel = getCategoryLabel(msg.category);
-            const mainTopicBadge = msg.isMainTopic ? '<span class="main-topic-badge">★</span>' : '';
             html += `
                 <li class="news-item ${msg.isMainTopic ? 'is-main-topic' : ''}" data-id="${msg.id}">
                     <div class="news-header">
-                        <div class="news-title">${mainTopicBadge}${escapeHtml(msg.title)}</div>
+                        <div class="news-title">${getMainTopicBadge(msg.isMainTopic)}${escapeHtml(msg.title)}</div>
                         <div class="news-right">
                             <span class="news-category ${msg.category}">${categoryLabel}</span>
                             <div class="news-meta">${formatDate(msg.created)}</div>
@@ -422,6 +420,11 @@ function getCategoryLabel(category) {
         'hr': 'HR'
     };
     return labels[category] || category;
+}
+
+// Generate main topic badge HTML
+function getMainTopicBadge(isMainTopic) {
+    return isMainTopic ? '<span class="main-topic-badge">★</span>' : '';
 }
 
 // Escape HTML to prevent XSS
