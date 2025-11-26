@@ -170,17 +170,8 @@ function renderNewsList() {
         </div>
     `;
 
-    // Handle start view (aloitusnäkymä) - show info box and one main topic per category
+    // Handle start view (aloitusnäkymä) - show one main topic per category, then info box below
     if (App.currentFilter === 'aloitus') {
-        // Info box with edit button
-        html += `
-            <div class="info-box">
-                <div class="info-box-icon">ℹ️</div>
-                <div class="info-box-text">${escapeHtml(App.infoBoxText)}</div>
-                <button class="info-box-edit-btn" id="edit-info-box-btn" aria-label="Muokkaa tiivistelmää">✏️</button>
-            </div>
-        `;
-        
         // Get main topics from each category (one per category)
         const categories = ['johto', 'tuotekehitys', 'it-tuki', 'turvallisuus', 'hr'];
         const mainTopics = [];
@@ -228,6 +219,15 @@ function renderNewsList() {
                 </div>
             `;
         }
+        
+        // Info box with edit button - now placed after news items
+        html += `
+            <div class="info-box">
+                <div class="info-box-icon">ℹ️</div>
+                <div class="info-box-text">${escapeHtml(App.infoBoxText)}</div>
+                <button class="info-box-edit-btn" id="edit-info-box-btn" aria-label="Muokkaa tiivistelmää">✏️</button>
+            </div>
+        `;
     } else if (filtered.length > 0) {
         html += '<ul class="news-list">';
         filtered.forEach(msg => {
