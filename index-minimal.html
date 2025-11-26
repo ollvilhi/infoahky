@@ -51,7 +51,7 @@
                 <div class="form-group">
                     <label for="message-category">Kategoria</label>
                     <select id="message-category">
-                        <option value="uutiset">Uutinen</option>
+                        <option value="johto">Johto</option>
                         <option value="tuotekehitys">Tuotekehitys</option>
                         <option value="it-tuki">IT-tuki</option>
                         <option value="turvallisuus">Turvallisuus</option>
@@ -60,6 +60,26 @@
                 </div>
                 <div class="form-actions">
                     <button type="button" class="btn-cancel" id="cancel-btn">Peruuta</button>
+                    <button type="submit" class="btn-submit">Tallenna</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for editing info box text -->
+    <div class="modal" id="infobox-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Muokkaa tiivistelmää</h2>
+                <button class="modal-close" id="infobox-close-btn" aria-label="Sulje">&times;</button>
+            </div>
+            <form id="infobox-form">
+                <div class="form-group">
+                    <label for="infobox-text">Tiivistelmä</label>
+                    <textarea id="infobox-text" rows="4" maxlength="500" required placeholder="Tiivistelmän teksti"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" id="infobox-cancel-btn">Peruuta</button>
                     <button type="submit" class="btn-submit">Tallenna</button>
                 </div>
             </form>
