@@ -7,7 +7,8 @@
 const App = {
     messages: [],
     editingId: null,
-    currentFilter: 'all'
+    currentFilter: 'all',
+    infoBoxText: 'Tervetuloa organisaation tiedotuskanavalle. Tältä sivulta löydät ajankohtaiset uutiset ja tärkeimmät tiedotteet eri kategorioista. Pysy ajan tasalla!'
 };
 
 // Initialize application
@@ -110,7 +111,7 @@ function renderNewsList() {
     
     // Filter messages
     let filtered = [...App.messages];
-    if (App.currentFilter !== 'all') {
+    if (App.currentFilter !== 'all' && App.currentFilter !== 'aloitus') {
         filtered = filtered.filter(m => m.category === App.currentFilter);
     }
     
@@ -120,6 +121,7 @@ function renderNewsList() {
     // Build HTML
     let html = `
         <div class="filter-tabs">
+            <button class="filter-tab ${App.currentFilter === 'aloitus' ? 'active' : ''}" data-filter="aloitus">Aloitus</button>
             <button class="filter-tab ${App.currentFilter === 'all' ? 'active' : ''}" data-filter="all">Kaikki</button>
             <button class="filter-tab ${App.currentFilter === 'uutiset' ? 'active' : ''}" data-filter="uutiset">Uutiset</button>
             <button class="filter-tab ${App.currentFilter === 'tuotekehitys' ? 'active' : ''}" data-filter="tuotekehitys">Tuotekehitys</button>
@@ -129,14 +131,73 @@ function renderNewsList() {
         </div>
     `;
 
-    if (filtered.length > 0) {
+    // Handle start view (aloitusnäkymä) - show info box and one main topic per category
+    if (App.currentFilter === 'aloitus') {
+        // Info box
+        html += `
+            <div class="info-box">
+                <div class="info-box-icon">ℹ️</div>
+                <div class="info-box-text">${escapeHtml(App.infoBoxText)}</div>
+            </div>
+        `;
+        
+        // Get main topics from each category (one per category)
+        const categories = ['uutiset', 'tuotekehitys', 'it-tuki', 'turvallisuus', 'hr'];
+        const mainTopics = [];
+        
+        categories.forEach(cat => {
+            // First try to find a message marked as main topic
+            let mainMsg = App.messages.find(m => m.category === cat && m.isMainTopic);
+            // If none marked, get the newest message from that category
+            if (!mainMsg) {
+                const catMessages = App.messages.filter(m => m.category === cat);
+                if (catMessages.length > 0) {
+                    catMessages.sort((a, b) => new Date(b.created) - new Date(a.created));
+                    mainMsg = catMessages[0];
+                }
+            }
+            if (mainMsg) {
+                mainTopics.push(mainMsg);
+            }
+        });
+        
+        if (mainTopics.length > 0) {
+            html += '<h3 class="main-topics-title">Pääaiheet</h3>';
+            html += '<ul class="news-list main-topics-list">';
+            mainTopics.forEach(msg => {
+                const categoryLabel = getCategoryLabel(msg.category);
+                const mainTopicBadge = msg.isMainTopic ? '<span class="main-topic-badge">★</span>' : '';
+                html += `
+                    <li class="news-item main-topic-item" data-id="${msg.id}">
+                        <div class="news-header">
+                            <div class="news-title">${mainTopicBadge}${escapeHtml(msg.title)}</div>
+                            <div class="news-right">
+                                <span class="news-category ${msg.category}">${categoryLabel}</span>
+                                <div class="news-meta">${formatDate(msg.created)}</div>
+                            </div>
+                        </div>
+                        <div class="news-content">${escapeHtml(msg.content)}</div>
+                    </li>
+                `;
+            });
+            html += '</ul>';
+        } else {
+            html += `
+                <div class="empty-state">
+                    <div class="empty-state-icon">📝</div>
+                    <div class="empty-state-text">Ei pääaiheita</div>
+                </div>
+            `;
+        }
+    } else if (filtered.length > 0) {
         html += '<ul class="news-list">';
         filtered.forEach(msg => {
             const categoryLabel = getCategoryLabel(msg.category);
+            const mainTopicBadge = msg.isMainTopic ? '<span class="main-topic-badge">★</span>' : '';
             html += `
-                <li class="news-item" data-id="${msg.id}">
+                <li class="news-item ${msg.isMainTopic ? 'is-main-topic' : ''}" data-id="${msg.id}">
                     <div class="news-header">
-                        <div class="news-title">${escapeHtml(msg.title)}</div>
+                        <div class="news-title">${mainTopicBadge}${escapeHtml(msg.title)}</div>
                         <div class="news-right">
                             <span class="news-category ${msg.category}">${categoryLabel}</span>
                             <div class="news-meta">${formatDate(msg.created)}</div>
@@ -144,6 +205,7 @@ function renderNewsList() {
                     </div>
                     <div class="news-content">${escapeHtml(msg.content)}</div>
                     <div class="news-actions">
+                        <button class="btn-action btn-main-topic" data-action="toggle-main">${msg.isMainTopic ? 'Poista pääaihe' : 'Aseta pääaiheeksi'}</button>
                         <button class="btn-action btn-edit" data-action="edit">Muokkaa</button>
                         <button class="btn-action btn-delete" data-action="delete">Poista</button>
                     </div>
@@ -208,6 +270,8 @@ function renderNewsList() {
                     editMessage(id);
                 } else if (action === 'delete') {
                     deleteMessage(id);
+                } else if (action === 'toggle-main') {
+                    toggleMainTopic(id);
                 }
                 return;
             }
@@ -300,6 +364,29 @@ function deleteMessage(id) {
         saveMessages();
         renderNewsList();
     }
+}
+
+// Toggle main topic status (only one per category)
+function toggleMainTopic(id) {
+    const message = App.messages.find(m => m.id === id);
+    if (!message) return;
+    
+    if (message.isMainTopic) {
+        // Unmark as main topic
+        message.isMainTopic = false;
+    } else {
+        // Unmark any other main topic in the same category
+        App.messages.forEach(m => {
+            if (m.category === message.category) {
+                m.isMainTopic = false;
+            }
+        });
+        // Mark this message as main topic
+        message.isMainTopic = true;
+    }
+    
+    saveMessages();
+    renderNewsList();
 }
 
 // Format date
