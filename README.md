@@ -51,6 +51,45 @@ python -m http.server 8000
 # Avaa selaimessa: http://localhost:8000
 ```
 
+## Git-työnkulku
+
+### Commit-editorin käyttö
+
+Kun suoritat `git commit` tai `git merge` -komentoja ilman `-m`-parametria, Git avaa oletuseditorin viestin kirjoittamista varten. Tässä ohjeita yleisimpien editorien käyttöön:
+
+#### Vim-editori (oletus monissa järjestelmissä)
+
+1. **Kirjoita viesti**: Paina `i` siirtyäksesi insert-tilaan
+2. **Tallenna ja poistu**: Paina `Esc`, kirjoita `:wq` ja paina `Enter`
+3. **Poistu tallentamatta**: Paina `Esc`, kirjoita `:q!` ja paina `Enter`
+
+#### Nano-editori
+
+1. **Kirjoita viesti**: Kirjoita suoraan
+2. **Tallenna ja poistu**: Paina `Ctrl+O` (tallenna), `Enter`, sitten `Ctrl+X` (poistu)
+
+#### Editorin vaihtaminen
+
+Voit vaihtaa Git-editorin helpommin käytettäväksi:
+
+```bash
+# Vaihda Nanoon (helpompi käyttää)
+git config --global core.editor "nano"
+
+# Vaihda VS Codeen (odottaa kunnes suljet tiedoston)
+git config --global core.editor "code --wait"
+
+# Vaihda Notepad++:aan (Windows)
+git config --global core.editor "'C:/Program Files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"
+```
+
+### Merge-konfliktien ratkaiseminen
+
+1. **Konfliktin tunnistaminen**: `git status` näyttää konfliktitiedostot
+2. **Konfliktin korjaaminen**: Avaa konfliktitiedostot ja poista `<<<<<<<`, `=======` ja `>>>>>>>` -merkinnät
+3. **Merkitse ratkaistuksi**: `git add <tiedosto>`
+4. **Viimeistele merge**: `git commit` (tai käytä `-m "viesti"` välttääksesi editorin)
+
 ## Lisenssi
 
 Teknologiajohtamisen projektikurssit.
