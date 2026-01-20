@@ -139,7 +139,7 @@ Kysymys Cloud Agentille:
 
 ### Rajoitukset ja huomioitavaa
 
-- Cloud Agent tarvii internet-yhteyden toimiakseen
+- Cloud Agent tarvitsee internet-yhteyden toimiakseen
 - Vastaukset perustuvat julkiseen tietoon eikä yksityisiin repositorioihin (ellei erikseen sallittu)
 - Tarkista aina generoitu koodi ennen käyttöönottoa
 - Cloud Agent ei korvaa hyvää ohjelmointikäytäntöä ja testaamista
