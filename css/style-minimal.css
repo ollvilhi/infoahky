@@ -97,7 +97,7 @@ body {
 .news-item {
     padding: 4px 16px;      /* pienempi padding */
     margin-bottom: 0;       /* ei väliä */
-    border-bottom: 1px solid var(--border-light);
+    border-bottom: 1px solid #1e293b;
 }
 
 .news-item:hover {
